@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tab Usage Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Tab Usage Data</h1>
+  <canvas id="usageChart" width="800" height="400"></canvas>
+
+  <script>
+    // Function to fetch and display data
+    async function fetchData() {
+      try {
+        const response = await fetch('/tabData'); // Fetch from your server endpoint
+        const jsonData = await response.json();
+
+        // Process jsonData and create chart
+        const labels = jsonData.map(entry => new Date(parseInt(entry.timestamp)).toLocaleTimeString());
+        const data = jsonData.map(entry => {
+          // Calculate usage time or other metrics as needed
+          return entry.performance.timing.loadEventEnd - entry.performance.timing.navigationStart; // Example: calculate load time
+        });
+
+        // Chart.js configuration
+        const ctx = document.getElementById('usageChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Tab Usage Time',
+              data: data,
+              fill: false,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'time',
+                time: {
+                  unit: 'hour'
+                }
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    // Call fetchData function to load and display data
+    fetchData();
+  </script>
+</body>
+</html>

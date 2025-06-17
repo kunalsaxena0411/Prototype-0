@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tab Resource Monitor</title>
+    <script src="popup.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: #f0f0f0;
+        width: 300px; /* Set a fixed width for the extension popup */
+      }
+
+      button {
+        padding: 10px;
+        font-size: 1.2em;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      #logout {
+        background: #ff4b5c;
+      }
+
+      #logout:hover {
+        background: #e33e4f;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tab Resource Monitor</h1>
+    <button id="startMonitoring">Start Monitoring</button>
+    <button id="stopMonitoring">Stop Monitoring</button>
+    <button id="logout">Logout</button>
+  </body>
+</html>
